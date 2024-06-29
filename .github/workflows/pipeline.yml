@@ -1,4 +1,4 @@
-name: Build and Test
+name: Build Test and Deploy
 
 on:
   push:
@@ -44,3 +44,16 @@ jobs:
       run: npm start &
     - name: Execute UI tests
       run: npm run test:ui
+
+  deploy:
+    needs: build-and-execute-ui-tests
+    runs-on: ubuntu-latest
+    steps:
+        - name: Checkout the repo
+          uses: actions/checkout@v4
+        - name: Use JorgeLNJunior/render-deploy
+          uses: JorgeLNJunior/render-deploy@v1.4.4
+          with:
+            service_id: ${{ secrets.RENDER_SERVICE_ID }}
+            api_key: ${{ secrets.RENDER_API_KEY }}
+            wait_deploy: true    
