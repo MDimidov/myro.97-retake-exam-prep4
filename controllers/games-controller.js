@@ -13,7 +13,7 @@ function setup(app, games) {
     });
   
     app.get('/games', function(req, res) {
-      let model = {title: "Games", games};
+      let model = {title: "Gamessssssssssss", games};
       res.render('games', model);
     });
   
